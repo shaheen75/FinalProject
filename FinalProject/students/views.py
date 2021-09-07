@@ -5,6 +5,9 @@ from django.http import HttpResponse
 def layout(request):
     return render(request,'app.html')
 
+def homePage(request):
+    return render(request,'home.html')
+
 def booksPage(request):
     return render(request,'books.html')
 
