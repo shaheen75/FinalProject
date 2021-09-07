@@ -4,3 +4,12 @@ from django.http import HttpResponse
 
 def layout(request):
     return render(request,'app.html')
+
+def booksPage(request):
+    return render(request,'books.html')
+
+def loginPage(request):
+    return render(request,'login.html')
+
+def signPage(request):
+    return render(request,'sign_up.html')

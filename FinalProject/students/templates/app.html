@@ -14,10 +14,10 @@
 
 
 <div class="topnav">
-  <a href="#home" class="active">Home</a>
-  <a href="#news">Books</a>
-  <a href="#contact">Contact</a>
-  <a href="#">login</a>
+  <a href="#" class="active">Home</a>
+  <a href="{% url 'books' %}">Books</a>
+  <a href="#">Contact</a>
+  <a href="{% url 'login' %}">login</a>
 </div>
 </HEADER>
 {% block part1 %}

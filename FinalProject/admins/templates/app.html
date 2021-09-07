@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
   <!-- CSS only -->
-  <link rel="stylesheet" href="../static/students/css/style.css">
+  <link rel="stylesheet" href="../static/admins/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -15,9 +15,9 @@
 
 <div class="topnav">
   <a href="#home" class="active">Home</a>
-  <a href="#news">Books</a>
-  <a href="#contact">Contact</a>
-  <a href="#">login</a>
+  <a href="{% url 'books' %}">Books</a>
+  <a href="{% url 'sign_up' %}">Sign Up</a>
+  <a href="{% url 'login' %}">login</a>
 </div>
 </HEADER>
 {% block part1 %}
