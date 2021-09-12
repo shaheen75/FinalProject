@@ -10,7 +10,16 @@
 
 </head>
 <body>
-
+<h1>Users Profiles</h1>
+{%for user in profile%}
+<div class="card" style="width: 18rem; display: inline-block">
+  <img src="../static/students/images/pr1.jpg" class="card-img-top" alt="book">
+  <div class="card-body">
+    <h5 class="card-title">{{user.name}}</h5>
+    <a href="{%url 'dashboard' user.id%}" class="btn btn-primary">View Profile</a>
+  </div>
+</div>
+{%endfor%}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
