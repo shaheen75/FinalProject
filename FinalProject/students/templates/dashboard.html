@@ -1,6 +1,7 @@
 {%extends 'app.html'%}
 {%block part1%}
 {%load static%}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +10,79 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 <body>
-<h1>My Profile</h1>
-
-{%for user in dashboardPage%}
-<div class="card" style="width: 18rem; display: inline-block">
-  <img src="../static/students/images/pr1.jpg" class="card-img-top" alt="user">
-  <div class="card-body">
-    <h5 class="card-title">Name: {{user.name}}</h5>
-      <h5 class="card-title">Email: {{user.Email}}</h5>
-      <h5 class="card-title">City: {{user.city}}</h5>
-    <a href="#" class="btn btn-primary">edit Profile</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+           <li class="nav-item">
+        <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {%endif%}
+    </ul>
   </div>
-</div>
-{%endfor%}
+</nav>
+ {% if messages %}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+	<!--User-->
+	<br><br>
+	<div class="container mx-auto">
+	    <div class="row">
+	    	<div class="col-sm-12 col-md-12 col-lg-3 pb-4">
+		    	<div class="card p-4">
+			    	<h4 class="card-title font-weight-bold text-center">Hello, {{ user.username|title }}</h4>
+			      	<hr>
+			    	<div class="card-text">
+			    		<p class="text-muted mb-0" style="font-size: 12px">Username:</p>
+			    		<p>{{ user.username }}</p>
+			    		<p class="text-muted mb-0" style="font-size: 12px">Name:</p>
+				  		<p>{{ user.first_name }} {{ user.last_name }}</p>
+				  		<p class="text-muted mb-0" style="font-size: 12px">Email:</p>
+				  		<p>{{ user.email }} </p>
+                      <div class="text-right">
+                        <a type="submit" class="btn btn-outline-primary btn-sm" href="{%url 'editprofile'%}">Edit Profile</a>
+                      </div>
+			        </div>
+		    	</div>
+		  	</div>
+		     <div class="col-sm-12 col-md-12 col-lg-9 pb-4">
+		    	<div class="row">
+		    		<div class="col-6 my-auto">
+		    			<h2 class="font-weight-bold pt-4">Book List</h2>
+		    		</div>
+		      	<div class="row">
+			      	{% for b in user.profile.books.all %}
+				    	<div class="col-sm-12 col-md-6 ">
+			                <div>
+			                	<img src="../static/students/images/{{ b.book_img }}" class="card-img-top" alt="{{ b.book_name }}" style="width: auto; height: 225px; object-fit: scale-down;">
+			                	<div class="card-body">
+			                  		<h5 class="card-title">{{ b.book_name }}</h5>
+			                    	<p class="card-text text-muted" style="font-size:12px">{{ b.book_author }}</p>
+									<p class="card-text-center" style="font-size:12px">borrowed at: {{ b.borrowed_at }}</p>
+									<p class="card-text-center" style="font-size:12px">Should return at: {{ b.return_date }}</p>
+									<a type="submit" class="btn btn-outline-primary btn-sm" href="{%url 'back_shelf' b.id %}">Return Shelf</a>
+			                	</div>
+			              	</div>
+			            </div>
+			    	{% endfor %}
+		        </div>
+		    </div>
+		</div>
+		</div>
+	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>

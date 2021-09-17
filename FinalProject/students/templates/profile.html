@@ -16,7 +16,7 @@
   <img src="../static/students/images/pr1.jpg" class="card-img-top" alt="book">
   <div class="card-body">
     <h5 class="card-title">{{user.name}}</h5>
-    <a href="{%url 'dashboard' user.id%}" class="btn btn-primary">View Profile</a>
+    <a href="{%url 'dashboard' user_id=user.id%}" class="btn btn-primary">View Profile</a>
   </div>
 </div>
 {%endfor%}
