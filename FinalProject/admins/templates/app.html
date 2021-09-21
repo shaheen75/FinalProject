@@ -19,6 +19,10 @@
   <a href="{% url 'sign_up' %}">Sign Up</a>
   <a href="{% url 'login' %}">Login</a>
   <a href="{% url 'dashboard' %}">My Profile</a>
+    {%if user.is_superuser%}
+  <a href="{% url 'index' %}">Admin Dashboard</a>
+    {%endif%}
+
 </div>
 </HEADER>
 {% block part1 %}

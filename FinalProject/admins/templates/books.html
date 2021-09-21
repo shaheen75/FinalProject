@@ -15,6 +15,7 @@
     <li class="breadcrumb-item active" aria-current="page">Books</li>
   </ol>
 </nav>
+<h1>The Books</h1>
 {%for b in page_obj%}
 <div class="card" style="display: inline-block ;width: 18rem;">
 <div class="card card-block">
@@ -28,7 +29,7 @@
                                         <form method="POST">
                                             {% csrf_token %}
                                             <input type="hidden" value="{{b.pk}}" name="book_pk">
-                                            <button type="submit" class="btn btn-outline-primary" style="font-size:18px;">Borrow</button>
+                                            <a type="submit" class="btn btn-outline-primary" href="{%url 'add_book' b.id %}" style="font-size:18px;">Borrow</a>
                                         </form>
                                     {% else %}
                                         <a  href="{% url 'sign_up' %}" class="btn btn-primary" style="font-size:18px;">Borrow</a>
